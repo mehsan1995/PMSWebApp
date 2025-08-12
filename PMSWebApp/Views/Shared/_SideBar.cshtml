@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div class="text-center mb-4">
+    @*   <img src="~/pms icon.png" class="img-fluid" alt="logo"> *@
+    <h3 class="mb-0 text-success">PMS</h3>
+</div>
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex align-items-center justify-content-between"
+           data-bs-toggle="collapse"
+           href="#menu1"
+           role="button"
+           aria-expanded="@NavMenuHelper.IsAriaExpanded(HttpContextAccessor.HttpContext, "Users,Roles")">
+            <span>
+                <i class="bi bi-person-circle"></i>
+                <span class="arabic-font">@Localizer["UserManagement"]</span>
+            </span>
+            <i class="bi bi-chevron-right"></i>
+        </a>
+        <div class="collapse @NavMenuHelper.IsMenuOpen(HttpContextAccessor.HttpContext, "Users,Roles")" id="menu1">
+            <ul class="nav flex-column ms-4">
+                <li>
+                    <a class="nav-menu-item nav-link @NavMenuHelper.IsActive(HttpContextAccessor.HttpContext, "Users", "Users")"
+                       asp-controller="Users" asp-action="Users"><span class="arabic-font">@Localizer["Users"]</span></a>
+                </li>
+                <li>
+                    <a class="nav-menu-item nav-link @NavMenuHelper.IsActive(HttpContextAccessor.HttpContext, "Roles", "Index")"
+                       asp-controller="Roles" asp-action="Index"><span class="arabic-font">@Localizer["RolesPermissions"]</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a asp-controller="Departments" asp-action="Index" class="nav-menu-item @NavMenuHelper.IsActive(HttpContextAccessor.HttpContext, "Departments", "Index")  nav-link d-flex align-items-center">
+            <span><i class="bi bi-diagram-3"></i><span class="nav-text"><span class="arabic-font">@Localizer["Departments"]</span></span></span>
+        </a>
+
+    </li>
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex  align-items-center">
+            <span><i class="bi bi-buildings"></i> <span class="nav-text"><span class="arabic-font">@Localizer["Companies"]</span></span></span>
+        </a>
+
+    </li>
+    <li class="nav-item">
+        <a asp-action="Settings" asp-controller="Settings" class="nav-menu-item nav-link d-flex  align-items-center">
+            <span><i class="bi bi-gear"></i> <span class="nav-text"><span class="arabic-font">@Localizer["SystemSettings"]</span></span></span>
+        </a>
+
+    </li>
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex  align-items-center">
+            <span><i class="bi bi-bell"></i> <span class="nav-text"><span class="arabic-font">@Localizer["Notifications"]</span></span></span>
+        </a>
+
+    </li>
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex align-items-center justify-content-between"
+           data-bs-toggle="collapse"
+           href="#menu2"
+           role="button"
+           aria-expanded="false">
+            <span>
+                <i class="bi bi-info-circle"></i>
+                <span class="arabic-font">@Localizer["CSM"]</span>
+            </span>
+            <i class="bi bi-chevron-right"></i>
+        </a>
+        <div class="collapse" id="menu2" data-bs-parent="#sidebar">
+            <ul class="nav flex-column ms-4">
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["PrivacyPolicy"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["Terms"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["FAQs"]</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex  align-items-center">
+            <span><i class="bi bi-menu-button-wide-fill"></i> <span class="nav-text"><span class="arabic-font">@Localizer["OptionsManagement"]</span></span></span>
+        </a>
+
+    </li>
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#menu3" role="button" aria-expanded="false">
+            <span>
+                <i class="bi bi-graph-up-arrow"></i>
+                <span class="arabic-font">@Localizer["StrategyPlanning"]</span>
+            </span>
+            <i class="bi bi-chevron-right"></i>
+        </a>
+        <div class="collapse" id="menu3" data-bs-parent="#sidebar">
+            <ul class="nav flex-column ms-4">
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["Objective"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["KPIs"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["Initiatives"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["Portfolio"]</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+<hr>
+<ul class="nav flex-column mt-auto">
+    <li><a href="#" class="nav-link"><i class="bi bi-gear"></i> Settings</a></li>
+    <li><a href="#" class="nav-link"><i class="bi bi-question-circle"></i> Help</a></li>
+</ul>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

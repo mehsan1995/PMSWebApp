@@ -1,0 +1,88 @@
+﻿@model PMSWebApp.Models.CreateDepartmentViewModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DepartmentsController> Localizer
+@{
+    var actionName = Model.Department.Id>0 ? Localizer["UpdateDepartment"] : Localizer["NewDepartment"];
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h6>@actionName</h6>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="AddEdit" id="createDepartmentForm" method="post">
+                    <input type="hidden" asp-for="Department.Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.DepTypeId" class="form-label fw-semibold"></label>
+                            <select asp-for="Department.DepTypeId" class="form-control" asp-items="Model.DepartmentsType">
+                                <option value="">-- Select Department Type --</option>
+                            </select>
+                            <span asp-validation-for="Department.DepTypeId" class="text-danger"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.ParentId" class="form-label fw-semibold"></label>
+                            <select asp-for="Department.ParentId" class="form-control" asp-items="Model.DepartmentList">
+                                <option value="">-- Select Department --</option>
+                            </select>
+                            <span asp-validation-for="Department.ParentId" class="text-danger"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.Name" class="form-label fw-semibold"></label>
+                            <input asp-for="Department.Name" type="text" class="form-control" placeholder="" />
+                            <span asp-validation-for="Department.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.ManagerTitle" class="form-label fw-semibold"></label>
+                            <input asp-for="Department.ManagerTitle" type="text" class="form-control" placeholder="" />
+                            <span asp-validation-for="Department.ManagerTitle" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.DepartmentCode" class="form-label fw-semibold"></label>
+                            <input asp-for="Department.DepartmentCode" type="text" class="form-control" placeholder="" />
+                            <span asp-validation-for="Department.DepartmentCode" class="text-danger"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.Signature" class="form-label fw-semibold"></label>
+                            <input asp-for="Department.Signature" type="text" class="form-control" placeholder="" />
+                            <span asp-validation-for="Department.Signature" class="text-danger"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.GeneralOrder" class="form-label fw-semibold"></label>
+                            <input asp-for="Department.GeneralOrder" type="text" class="form-control" placeholder="" />
+                            <span asp-validation-for="Department.GeneralOrder" class="text-danger"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Department.ParentOrder" class="form-label fw-semibold"></label>
+                            <input asp-for="Department.ParentOrder" type="text" class="form-control" placeholder="" />
+                            <span asp-validation-for="Department.ParentOrder" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+
+                            <button type="submit" class="btn btn-success fw-bold">@actionName</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
+

@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model PMSWebApp.Models.UsersViewModel
+@using PMSWebApp.Controllers
+@inject Microsoft.Extensions.Localization.IStringLocalizer<UsersController> Localizer
+
+<div class="card">
+    <div class="card-header">
+        <!-- Row 1 -->
+        <div class="row align-items-center">
+            <div class="col-md-1">
+                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">
+                    <i class="bi bi-arrow-left me-1"></i>
+                </button>
+            </div>
+            <div class="col-md-5 mb-2 mb-md-0">
+                <h4 class="mb-0">
+                    @Localizer["UserDetails"]
+                </h4>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-body">
+        <!-- User Info Section -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3 d-flex align-items-center">
+                        <img src=""
+                             class="rounded-circle d-none"
+                             alt="User" width="40" height="40"
+                             >
+                        <i class="bi bi-person-circle user-icon-xxl user-icon"></i>
+                    </div>
+                    <div class="col-md-9 mt-3 mt-md-0">
+                        <h6 class="mb-0">@(Model.User.FirstName + " " + Model.User.LastName)</h6>
+                        <small class="text-muted">@Model.User.JobTitle</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 border-start">
+                <div class="mb-2">
+                    <small class="text-muted">Role</small>
+                    <h6 class="mb-0">Project Manager</h6>
+                </div>
+                <div>
+                    <small class="text-muted">Email</small>
+                    <h6 class="mb-0">@Model.User.Email</h6>
+                </div>
+            </div>
+
+            <div class="col-md-4 border-start">
+                <div class="mb-2">
+                    <small class="text-muted">Department</small>
+                    <h6 class="mb-0">Default</h6>
+                </div>
+                <div>
+                    <small class="text-muted">Mobile Number</small>
+                    <h6 class="mb-0">@Model.User.PhoneNumber</h6>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <ul class="nav nav-tabs mb-3" id="userTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-success active" id="general-tab" data-bs-toggle="tab" data-bs-target="#projects" type="button" role="tab">Projects</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-secondary" id="roles-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab">Assigned Tasks</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-secondary" id="templates-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab">Activity</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="userTabsContent">
+            <div class="tab-pane fade show active" id="projects" role="tabpanel">
+                <h5>@Localizer["Projects"]</h5>
+            </div>
+            <div class="tab-pane fade" id="tasks" role="tabpanel">
+                <h5>@Localizer["Tasks"]</h5>
+            </div>
+            <div class="tab-pane fade" id="activity" role="tabpanel">
+                <h5>@Localizer["Activity"]</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+          $('#userTabs .nav-link').on('click', function () {
+            // Reset all tabs to secondary
+            $('#userTabs .nav-link')
+              .removeClass('text-success')
+              .addClass('text-secondary');
+
+            // Make the clicked tab success
+            $(this)
+              .removeClass('text-secondary')
+              .addClass('text-success');
+          });
+        });
+    </script>
+
+
+}

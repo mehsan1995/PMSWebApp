@@ -1,0 +1,117 @@
+﻿body {
+    background-color: #f8f9fa;
+    font-size: 0.9rem;
+}
+
+.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    min-height: 100vh;
+}
+
+    .sidebar .nav-link {
+        color: #333;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+    }
+
+        .sidebar .nav-link.active {
+            background-color: #d1e7dd;
+            font-weight: bold;
+            color: Green;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #d1e7dd;
+            font-weight: bold;
+            color: Green;
+        }
+
+        .sidebar .nav-link i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.no-border-on-focus:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.no-shadow-on-focus:focus {
+    box-shadow: none;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.dataTable {
+    width: 100% !important;
+}
+
+.user-icon {
+    color: #198754;
+}
+
+.user-icon-xxl {
+    font-size: xx-large
+}
+
+[dir="rtl"] .bi-chevron-right::before {
+    content: "\f284"; /* Unicode for bi-chevron-left */
+}
+
+/* Smooth collapse effect for desktop sidebar */
+#desktopSidebar {
+    transition: all 0.3s ease;
+}
+
+    #desktopSidebar.collapsed {
+        width: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+/* Text direction arabic */
+.arabic-font {
+    font-family: 'Cairo', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+}
+
+/* Unchecked: white track and knob with border */
+.form-check-input-success {
+    background-color: #fff;
+    border: 1px solid #adb5bd;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+    /* Override Bootstrap default focus box shadow */
+    .form-check-input-success:focus {
+        box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    }
+    /* Checked: green track and knob */
+    .form-check-input-success:checked {
+        background-color: #198754;
+        border-color: #198754;
+    }
+    /* Change the ::before pseudo element (the track) color */
+    .form-check-input-success.form-check-input:checked::before {
+        background-color: #198754;
+        border-color: #198754;
+    }
+    /* Unchecked track is white */
+    .form-check-input-success.form-check-input::before {
+        background-color: #fff;
+        border: 1px solid #adb5bd;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+

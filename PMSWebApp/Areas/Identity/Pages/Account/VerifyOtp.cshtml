@@ -1,0 +1,98 @@
+﻿@page
+@model PMSWebApp.Areas.Identity.Pages.Account.VerifyOtpModel
+@{
+}
+
+<div class="text-center mb-4">
+    <i class="bi bi-triangle-fill text-success fs-1 fw-bold"></i>
+    <h2 class="fw-bold mt-2">Logoipsum</h2>
+</div>
+<!-- Login Card -->
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h4 class="fw-bold text-center mb-2">Reset Password</h4>
+                <p class="text-center text-muted mb-4">We have sent a code to <b>@Model.Input.Email</b></p>
+
+
+                <form method="post" id="otpForm">
+                    <input type="hidden" asp-for="Input.Email" />
+                    <input type="hidden" id="OtpCode" asp-for="Input.Otp" class="real-input">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <!-- OTP -->
+                    <div class="digit-display" id="digitDisplay">
+                        @for (int i = 0; i < 6; i++)
+                        {
+                            <div class="digit-box">
+                                <input type="text" maxlength="1" class="otp-input" data-index="@i" inputmode="numeric" autocomplete="one-time-code" />
+                            </div>
+                        }
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="button" id="verifyBtn" class="btn btn-success fw-bold">Verify</button>
+                    </div>
+
+                    <div class="d-grid mt-3">
+                        <a type="button" asp-page="./Login" class="btn btn-outline-secondary">Go Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            // Step 1: Digit input restrictions and auto tabbing
+            $(".otp-input").on("input", function () {
+                const $this = $(this);
+                const val = $this.val().replace(/\D/g, ""); // digits only
+                $this.val(val);
+
+                if (val.length === 1) {
+                    $this.parent().next().find(".otp-input").focus();
+                }
+            });
+
+            $(".otp-input").on("keydown", function (e) {
+                if (e.key === "Backspace" && !$(this).val()) {
+                    $(this).parent().prev().find(".otp-input").focus();
+                }
+            });
+
+            // Step 2: On button click, gather digits and submit
+            $("#verifyBtn").click(function () {
+                debugger
+                let otp = "";
+                $(".otp-input").each(function () {
+                    otp += $(this).val();
+                });
+
+                if (otp.length !== 6) {
+                    alert("Please enter a valid 6-digit code.");
+                    return;
+                }
+
+                $("#OtpCode").val(otp); // set hidden input value
+
+                $("#otpForm").submit(); // normal form submit (POST to Razor Page)
+            });
+
+            // Optional: focus first field on page load
+            $(".otp-input").first().focus();
+        });
+    </script>
+}
+
+
+
+
+
+
+

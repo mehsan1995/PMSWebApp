@@ -1,0 +1,343 @@
+﻿@using DAL.Models
+@using Microsoft.AspNetCore.Identity
+@using System.Globalization
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    var IsUserSignedIn = SignInManager.IsSignedIn(User);
+    var userManagement = Localizer["UserManagement"];
+}
+<!DOCTYPE html>
+<html dir="@((CultureInfo.CurrentUICulture.Name == "ar-SA") ? "rtl" : "ltr")"
+      lang="@CultureInfo.CurrentUICulture.Name">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PMSWebApp</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+   
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/pms.css" />
+    <link rel="stylesheet" href="~/css/otp.css" />
+    <link rel="stylesheet" href="~/css/Departments/departmentDetails.css" />
+ 
+</head>
+<body>
+    @if (IsUserSignedIn)
+    {
+        var user = await UserManager.GetUserAsync(User);
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- Sidebar -->
+                <div class="col-md-3 col-lg-3 d-none d-lg-block sidebar p-3" tabindex="-1" id="desktopSidebar">
+                   
+                    <partial name="_SideBar" model="user" />
+                   
+                </div>
+                <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="mobileSidebar">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body sidebar p-3">
+                        <partial name="_SideBar" model="user" />
+                    </div>
+                </div>
+                <!-- Main Content -->
+                <main class="col-md-9 ms-sm-auto col-lg-9">
+                   
+                    <!-- Top Bar -->
+
+                    <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <div class="d-flex align-items-center gap-3">
+                          @*   <button class="btn btn-outline-secondary" id="toggleSidebar">
+                                <i class="bi bi-list"></i>
+                            </button> *@
+                            <button class="btn btn-outline-secondary d-md-none" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                                <i class="bi bi-list"></i>
+                            </button>
+                            <h4 class="mb-0"></h4>
+                            <div>
+                                <a href="?culture=ar-SA" class="me-1">عربي</a> | <a href="?culture=en-US" class="ms-1">English</a>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <input type="text" class="form-control search-input rounded-pill" placeholder="Search" />
+                            <i class="bi bi-bell fs-5"></i>
+                            <div class="dropdown user-dropdown">
+                                <a class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-circle user-icon-xxl user-icon me-2"></i>
+                                    <span class="d-none d-sm-inline">@(user?.FirstName + " " + user?.LastName)</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        @RenderBody()
+                    </div>
+                </main>
+            </div>
+        </div>
+
+    }
+    else if (false)
+    {
+        var user = await UserManager.GetUserAsync(User);
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <div>
+                    <button class="btn btn-outline-secondary me-3" id="toggleSidebar">
+                        <i class="bi bi-list"></i>
+                    </button>
+           @*          <a class="navbar-brand" href="#">PMS</a> *@
+                </div>
+                <div>
+                    <a href="?culture=ar-SA" class="me-1">عربي</a> | <a href="?culture=en-US" class="ms-1">English</a>
+                </div>
+
+
+                <div class=" d-flex align-items-center gap-3 flex-wrap justify-content-end">
+                    <input type="text" class="form-control search-input rounded-pill" placeholder="Search" />
+                    <i class="bi bi-bell fs-5"></i>
+
+                    <div class="dropdown user-dropdown">
+                        <a class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle user-icon-xxl user-icon me-2"></i>
+                            <span class="d-none d-sm-inline">@(user?.FirstName + " " + user?.LastName)</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex">
+            <div id="sidebar" class="sidebar bg-light border-end p-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-menu-item nav-link d-flex align-items-center"
+                           data-bs-toggle="collapse"
+                           href="#menu1"
+                           role="button"
+                           aria-expanded="@NavMenuHelper.IsAriaExpanded(HttpContextAccessor.HttpContext, "Users,Roles")">
+                            <span><i class="bi bi-person-circle "></i><span class="menu-text">@Localizer["UserManagement"]</span></span>
+                            <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <div class="collapse @NavMenuHelper.IsMenuOpen(HttpContextAccessor.HttpContext, "Users,Roles")" id="menu1">
+                            <ul class="nav flex-column ms-4">
+                                <li>
+                                    <a class="nav-menu-item nav-link @NavMenuHelper.IsActive(HttpContextAccessor.HttpContext, "Users", "Users")"
+                                       asp-controller="Users" asp-action="Users"><span class="menu-text"><span class="menu-text">@Localizer["Users"]</span></span></a>
+                                </li>
+                                <li>
+                                    <a class="nav-menu-item nav-link @NavMenuHelper.IsActive(HttpContextAccessor.HttpContext, "Roles", "Index")"
+                                       asp-controller="Roles" asp-action="Index"><span class="menu-text">@Localizer["RolesPermissions"]</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Departments" asp-action="Index" class="nav-menu-item @NavMenuHelper.IsActive(HttpContextAccessor.HttpContext, "Departments", "Index")  nav-link d-flex align-items-center">
+                            <span><i class="bi bi-diagram-3"></i><span class="nav-text"><span class="menu-text">@Localizer["Departments"]</span></span></span>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-menu-item nav-link d-flex  align-items-center">
+                            <span><i class="bi bi-buildings"></i> <span class="nav-text"><span class="menu-text">@Localizer["Companies"]</span></span></span>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Settings" asp-controller="Settings" class="nav-menu-item nav-link d-flex  align-items-center">
+                            <span><i class="bi bi-gear"></i> <span class="nav-text"><span class="menu-text">@Localizer["SystemSettings"]</span></span></span>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-menu-item nav-link d-flex  align-items-center">
+                            <span><i class="bi bi-bell"></i> <span class="nav-text"><span class="menu-text">@Localizer["Notifications"]</span></span></span>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-menu-item nav-link d-flex  align-items-center" data-bs-toggle="collapse" href="#menu2" role="button" aria-expanded="false">
+                            <span><i class="bi bi-info-circle"></i> <span class="nav-text"><span class="menu-text">@Localizer["CSM"]</span></span></span>
+                            <i class="bi bi-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="collapse" id="menu2" data-bs-parent="#sidebar">
+                            <ul class="nav flex-column ms-4">
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["PrivacyPolicy"]</span></a>
+                                </li>
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["Terms"]</span></a>
+                                </li>
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["FAQs"]</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-menu-item nav-link d-flex  align-items-center">
+                            <span><i class="bi bi-menu-button-wide-fill"></i> <span class="nav-text"><span class="menu-text">@Localizer["OptionsManagement"]</span></span></span>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-menu-item nav-link d-flex  align-items-center" data-bs-toggle="collapse" href="#menu3" role="button" aria-expanded="false">
+                            <span><i class="bi bi-graph-up-arrow"></i><span class="nav-text"></span><span class="menu-text">@Localizer["StrategyPlanning"]</span></span>
+                            <i class="bi bi-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="collapse" id="menu3" data-bs-parent="#sidebar">
+                            <ul class="nav flex-column ms-4">
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["Objective"]</span></a>
+                                </li>
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["KPIs"]</span></a>
+                                </li>
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["Initiatives"]</span></a>
+                                </li>
+                                <li class="nav-item chil-menu">
+                                    <a class="nav-menu-item nav-link" href="#"><span class="menu-text">@Localizer["Portfolio"]</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- Sidebar + Content -->
+            <!-- Sidebar -->
+            <!-- Main Content -->
+            <div class="content flex-grow-1 p-4" id="mainContent">
+                @RenderBody()
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="position-relative">
+            <div class="dropdown language-switcher position-absolute top-0 end-0 m-4">
+                <form method="post" id="langForm">
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <div class="dropdown">
+                        <button class="btn btn-light rounded-pill dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="me-2">
+                                @if (CultureInfo.CurrentCulture.Name == "ar-SA")
+                                {
+                                    <img src="https://flagcdn.com/sa.svg" width="20" />
+                                }
+                                else
+                                {
+                                    <img src="https://flagcdn.com/gb.svg" width="20" />
+                                }
+                            </span>
+                            <span>
+                                @(CultureInfo.CurrentCulture.Name == "ar-SA" ? "العربية" : "English")
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center" type="submit" name="culture" value="en-US">
+                                    <img src="https://flagcdn.com/gb.svg" width="20" class="me-2" /> English
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center" type="submit" name="culture" value="ar-SA">
+                                    <img src="https://flagcdn.com/sa.svg" width="20" class="me-2" /> العربية
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            
+            <main role="main" class="pb-3">
+             
+                @RenderBody()
+            </main>
+        </div>
+        <div class="footer d-none d-md-flex justify-content-between p-3 bg-light border-top">
+            <div>© 2025 Privacy Policy · Terms</div>
+            <div>Contact: support@example.com</div>
+            <div>All rights reserved.</div>
+        </div>
+    }
+    <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post" style="display:none;">
+        <input name="__RequestVerificationToken"
+               type="hidden"
+               />
+    </form>
+    <div class="modal fade" id="departmentModal" tabindex="-1" aria-labelledby="departmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="departmentModalContent">
+                <!-- Content from API will be injected here -->
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="departmentUsersModal" tabindex="-1" aria-labelledby="departmentUsersModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="departmentUsersModalLabel">Department Users</h5>
+                   
+                </div>
+                <div class="modal-body">
+
+                    <!-- Select2 Dropdown -->
+                    <label for="departmentUsers">Users</label>
+                    <select id="departmentUsers" style="width:100%;"></select>
+
+                    <label for="departmentPermission">Permissions</label>
+                    <select id="departmentPermission" style="width:100%;"></select>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="CreateUserDepartment()" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="/js/layout.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

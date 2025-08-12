@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model PMSWebApp.Models.TenantViewModel
+@using PMSWebApp.Controllers
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DepartmentsController> Localizer
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i>
+        </button>
+        <h5 class="mb-0 arabic-font">@Localizer["Departments"]</h5>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="col-12 col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 rounded-pill">
+                        <input id="roleSearch" type="text"
+                               class="no-border-on-focus form-control "
+                               style="border: none;" />
+
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <button class="btn btn-outline-secondary"><i class="bi bi-funnel filter-icon Filter"></i>@Localizer["Filter"]</button>
+                    <a href="#" onclick="CreateUpdateDepartment()" class="btn btn-success arabic-font">@Localizer["NewDepartment"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped w-100" id="departmentTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Departments/department.js"></script>
+}

@@ -1,0 +1,14 @@
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\bin\Debug\net8.0\DAL.deps.json
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\bin\Debug\net8.0\DAL.runtimeconfig.json
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\bin\Debug\net8.0\DAL.dll
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\bin\Debug\net8.0\DAL.pdb
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.dll
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\refint\DAL.dll
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.pdb
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+D:\Ehsan\pms-web-api\PMS API\Infrastructure\obj\Debug\net8.0\ref\DAL.dll

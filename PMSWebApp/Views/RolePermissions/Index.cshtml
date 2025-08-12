@@ -1,0 +1,81 @@
+﻿@model RolePermissionViewModel
+
+@{
+    ViewData["Title"] = "Manage Permissions";
+    var actions = new[] { "View", "Create", "Modify", "Delete", "Approve" };
+}
+
+<div class="modal-header">
+    <h5 class="modal-title">@Model.RoleName</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+
+<form  method="post">
+    <input type="hidden" asp-for="RoleId" />
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <thead class="table-light">
+                <tr>
+                    <th class="">
+                        <input type="checkbox" id="selectAllModules" />
+                        Name
+                    </th>
+                    @foreach (var action in actions)
+                    {
+                        <th>@action</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var module in Model.PermissionModules)
+                {
+                    <tr>
+                        <td class="fw-bold">@module.Name</td>
+
+                        @foreach (var action in actions)
+                        {
+                            var permission = module.Permissions.FirstOrDefault(p => p.Name == action);
+
+                            <td>
+                                @if (permission != null)
+                                {
+                                    <input type="checkbox"
+                                           name="SelectedPermissionIds"
+                                           value="@permission.Id"
+                                           class="form-check-input"
+                                           @(permission.IsChecked ? "checked" : "") />
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Select all checkboxes when the "selectAllModules" checkbox is clicked
+            $('#selectAllModules').on('change', function () {
+                $('input[name="SelectedPermissionIds"]').prop('checked', this.checked);
+            });
+            // Handle individual checkbox changes
+            $('input[name="SelectedPermissionIds"]').on('change', function () {
+                if (!this.checked) {
+                    $('#selectAllModules').prop('checked', false);
+                }
+            });
+        });
+    </script>
+}

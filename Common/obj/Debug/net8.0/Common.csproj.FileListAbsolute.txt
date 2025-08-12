@@ -1,0 +1,12 @@
+D:\Ehsan\pms-web-api\PMS API\Common\bin\Debug\net8.0\Common.deps.json
+D:\Ehsan\pms-web-api\PMS API\Common\bin\Debug\net8.0\Common.dll
+D:\Ehsan\pms-web-api\PMS API\Common\bin\Debug\net8.0\Common.pdb
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.csproj.AssemblyReference.cache
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.dll
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\refint\Common.dll
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.pdb
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\ref\Common.dll

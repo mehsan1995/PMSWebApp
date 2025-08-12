@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model PMSWebApp.Models.TenantViewModel
+@using PMSWebApp.Controllers
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TenantsController> Localizer
+
+
+@{
+    ViewData["Title"] = Localizer["Tenants"];
+    var actionName = Localizer["TenantDetails"];
+}
+<div class="card">
+    <div class="card-header">
+        <!-- Row 1 -->
+        <div class="row align-items-center">
+            <div class="col-md-5 mb-2 mb-md-0">
+                <h4 class="mb-0 arabic-font">
+                    @actionName
+                </h4>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="card-body p-0 m-3">
+        <form>
+            <input type="hidden" asp-for="Tenant.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <label asp-for="Tenant.TenantName" class="form-label fw-semibold"></label>
+                    <input asp-for="Tenant.TenantName" type="text" class="form-control" placeholder="" />
+                    <span asp-validation-for="Tenant.TenantName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                    <label asp-for="Tenant.TenantCode" class="form-label fw-semibold"></label>
+                    <input asp-for="Tenant.TenantCode" type="text" class="form-control" placeholder="" />
+                    <span asp-validation-for="Tenant.TenantCode" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                    <label asp-for="Tenant.Description" class="form-label fw-semibold"></label>
+                    <input asp-for="Tenant.Description" type="text" class="form-control" placeholder="" />
+                    <span asp-validation-for="Tenant.Description" class="text-danger"></span>
+                </div>
+
+
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+

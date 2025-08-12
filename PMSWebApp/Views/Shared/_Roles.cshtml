@@ -1,0 +1,85 @@
+﻿<div class="card-header d-flex justify-content-between align-items-center">
+    <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">
+        <i class="bi bi-arrow-left me-1"></i>
+    </button>
+    <h5 class="mb-0">Roles and Permissions</h5>
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="col-12 col-md-6">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 rounded-pill">
+                    <input id="roleSearch" type="text"
+                           class="no-border-on-focus form-control "
+                           placeholder="Search..."
+                           style="border: none;" />
+
+                    <i class="bi bi-search"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+           
+            <div>
+                <button class="btn btn-outline-secondary"><i class="bi bi-funnel filter-icon"></i>Filter</button>
+                <a onclick="CreateNewRole()" href="#" class="btn btn-success">+ New Role</a>
+            </div>
+        </div>
+       @*  <div class="d-flex align-items-center gap-2">
+            <div class="btn-group" role="group">
+                <button class="btn btn-outline-secondary"><i class="bi bi-funnel filter-icon"></i>Filter</button>
+                <a class="btn btn-success" onclick="CreateNewRole()">+ New Role</a>
+            </div>
+        </div> *@
+    </div>
+</div>
+<div class="card-body p-0">
+    <button id="delete-selected" class="m-3 btn btn-outline-danger" hidden>Delete Selected</button>
+    <button id="disable-selected" class="m-3 btn btn-outline-secondary" hidden>Disable Selected</button>
+    <button id="enable-selected" class="m-3 btn btn-outline-dark" hidden>Enable Selected</button>
+    <table class="table table-hover mb-0" id="rolesTable">
+        <thead class="table-light" >
+            <tr>
+                <th><input type="checkbox" class="form-check-input" id="select-all-roles" /></th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+           @*  <tr>
+                <td><input type="checkbox" /></td>
+                <td>Portfolio Manager</td>
+                <td>
+                    <span class="badge rounded-pill text-danger bg-danger bg-opacity-10 px-3 py-2">
+                        Inactive
+                    </span>
+                </td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-dark rounded-pill btn-sm">Permissions</button>
+                        <button class="btn btn-outline-dark rounded-pill btn-sm">Enable</button>
+                        <button class="btn btn-outline-dark  rounded-pill btn-sm btn-icon"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-outline-danger  rounded-pill btn-sm btn-icon"><i class="bi bi-trash"></i></button>
+                    </div>
+                </td>
+            </tr> *@
+
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+    
+</div>
+<div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="roleModalContent">
+            <!-- Content from API will be injected here -->
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="rolePermissionsModal" tabindex="-1" aria-labelledby="rolePermissionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="rolepermissionsModalContent">
+        </div>
+    </div>
+</div>

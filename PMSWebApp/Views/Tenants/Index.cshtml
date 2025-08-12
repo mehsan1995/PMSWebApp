@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model PMSWebApp.Models.TenantViewModel
+@using PMSWebApp.Controllers
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TenantsController> Localizer
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i>
+        </button>
+        <h5 class="mb-0 arabic-font">@Localizer["Tenants"]</h5>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div class="col-12 col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 rounded-pill">
+                        <input id="roleSearch" type="text"
+                               class="no-border-on-focus form-control "
+                               style="border: none;" />
+
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <button class="btn btn-outline-secondary"><i class="bi bi-funnel filter-icon Filter"></i>@Localizer["Filter"]</button>
+                    <a asp-action="AddEdit" class="btn btn-success arabic-font">@Localizer["NewTenant"]</a>
+                </div>
+            </div>
+            @*  <div class="d-flex align-items-center gap-2">
+            <div class="btn-group" role="group">
+                <button class="btn btn-outline-secondary"><i class="bi bi-funnel filter-icon"></i>Filter</button>
+                <a class="btn btn-success" onclick="CreateNewRole()">+ New Role</a>
+            </div>
+        </div> *@
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+            <div class="table-responsive">
+               
+                <table class="table table-bordered table-striped w-100" id="tenantTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+
+    </div>
+</div>
+<div class="modal fade" id="tenantModal" tabindex="-1" aria-labelledby="tenantModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="tenantModalContent">
+            <!-- Content from API will be injected here -->
+        </div>
+    </div>
+</div>
+@section Scripts {
+        <script src="~/js/tenant.js"></script>
+    }
