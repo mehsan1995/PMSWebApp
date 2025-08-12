@@ -138,17 +138,17 @@ $(document).ready(function () {
     });
 });
 
-function Delete(tenantId) {
-    var isConfirmed = confirm('Are you sure you want to delete this tenant? This action cannot be undone.');
+function Delete(Id) {
+    var isConfirmed = confirm('Are you sure you want to delete this department? ');
     if (isConfirmed) {
         $.ajax({
             url: '/Departments/Delete',
             type: 'POST',
-            data: { id: tenantId },
+            data: { Id: Id },
             success: function (response) {
                 if (response.success) {
                     alert(response.message);
-                    $('#tenantTable').DataTable().ajax.reload();
+                    $('#departmentTable').DataTable().ajax.reload();
                 } else {
                     alert(`Error: ${response.message}\nDetails: ${response.detail}`);
                 }
