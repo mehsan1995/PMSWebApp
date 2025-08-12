@@ -18,7 +18,7 @@ namespace Application.AutoMapper
             CreateMap<Tenants, TenantsDto>().ReverseMap();
             CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<DepartmentUsers, DepartmentUsersDto>().ReverseMap();
-            CreateMap<TenantSettings, TenantSettingsDto>().ReverseMap();
+            CreateMap<Settings, SettingsDto>().ReverseMap();
         }
     }
 }

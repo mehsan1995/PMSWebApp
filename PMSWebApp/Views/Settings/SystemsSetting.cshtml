@@ -4,7 +4,9 @@
 }
 
 <div class="container py-4">
-    <form>
+    <form method="post">
+        <input type="hidden" asp-for="Settings.Id" />
+        <input type="hidden" asp-for="Settings.UserId" />
         <section class="mb-5">
             <h2 class="h5 fw-semibold mb-4">General Information</h2>
 
@@ -21,14 +23,15 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="languageSelect" class="form-label small text-secondary">Language</label>
-                    <select class="form-select" id="languageSelect" aria-label="Language select">
-                        <option selected>English 🇬🇧</option>
-                        <option>Arabic 🇸🇦</option>
+                    <select asp-for="Settings.Language" class="form-select">
+                        <option data-content='<img src="https://flagcdn.com/gb.svg" width="20" class="me-2" /> English' value="en-US" selected>English</option>
+                        <option data-content='<img src="https://flagcdn.com/sa.svg" width="20" class="me-2" /> العربية' value="ar-SA">العربية</option>
                     </select>
+
                 </div>
                 <div class="col-md-6">
                     <label for="timezoneSelect" class="form-label small text-secondary">Timezone</label>
-                    <select class="form-select" id="timezoneSelect" aria-label="Timezone select">
+                    <select asp-for="Settings.Timezone" class="form-select" id="timezoneSelect" aria-label="Timezone select">
                         <option selected>GMT+3 (Riyadh)</option>
                         <option>GMT+2 (Cairo)</option>
                         <option>GMT+0 (UTC)</option>
@@ -37,7 +40,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="currencySelect" class="form-label small text-secondary">Currency</label>
-                    <select class="form-select" id="currencySelect" aria-label="Currency select">
+                    <select asp-for="Settings.Currency" class="form-select" id="currencySelect" aria-label="Currency select">
                         <option selected>SAR (Saudi Riyal)</option>
                         <option>USD (US Dollar)</option>
                         <option>EUR (Euro)</option>
@@ -59,7 +62,7 @@
                 </div>
                 <div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="desktopNotificationToggle" checked />
+                        <input asp-for="Settings.EnableDesktopNotification" class="form-check-input form-check-input-success" type="checkbox" id="desktopNotificationToggle" />
                     </div>
                 </div>
             </div>
@@ -73,7 +76,7 @@
                 </div>
                 <div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="projectTaskToggle" checked />
+                        <input asp-for="Settings.ProjectTaskUpdates" class="form-check-input form-check-input-success" type="checkbox" id="projectTaskToggle" />
                     </div>
                 </div>
             </div>
@@ -87,7 +90,7 @@
                 </div>
                 <div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="approvalChangeToggle" />
+                        <input asp-for="Settings.ApprovalChangeRequests" class="form-check-input form-check-input-success" type="checkbox" id="approvalChangeToggle" />
                     </div>
                 </div>
             </div>
@@ -101,12 +104,18 @@
                 </div>
                 <div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="systemAnnouncementsToggle" />
+                        <input asp-for="Settings.SystemAnnouncements" class="form-check-input form-check-input-success" type="checkbox" id="systemAnnouncementsToggle" />
                     </div>
                 </div>
             </div>
         </section>
+        <div class="row">
+            <div class="text-end mt-3">
+                <a href="#" onclick="history.back(); return false;" class="btn btn-outline-secondary me-2">Cancel</a>
+                <button type="submit" class="btn btn-success fw-bold">Save</button>
+            </div>
 
+        </div>
 
     </form>
 

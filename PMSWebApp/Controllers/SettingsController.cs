@@ -4,6 +4,7 @@ using DAL.TenantProvider;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMSWebApp.Models;
+using System.Globalization;
 
 namespace PMSWebApp.Controllers
 {
@@ -11,12 +12,12 @@ namespace PMSWebApp.Controllers
     public class SettingsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ITenantProvider _tenantProvider;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SettingsController(IUnitOfWork unitOfWork, ITenantProvider tenantProvider)
+        public SettingsController(IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
         {
-                _unitOfWork = unitOfWork;
-               _tenantProvider = tenantProvider;
+            _unitOfWork = unitOfWork;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Settings()
         {
@@ -24,23 +25,34 @@ namespace PMSWebApp.Controllers
         }
         public async Task<IActionResult> SystemsSetting()
         {
-            var tenantId= _tenantProvider.GetTenantId();
+            var user = _httpContextAccessor.HttpContext?.User;
 
-            TenantSettingsViewModel vm= new TenantSettingsViewModel();
-            var TenantSettings=await _unitOfWork.SettingsService.GetByIdAsync(tenantId);
-            vm.TenantSettings = TenantSettings==null? new TenantSettingsDto() : TenantSettings;
-            return View(vm);
+            if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
+            {
+                var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                SettingsViewModel vm = new SettingsViewModel();
+                var Settings = await _unitOfWork.SettingsService.GetByIdAsync(userId);
+                vm.Settings = Settings == null ? new SettingsDto() : Settings;
+                vm.Settings.UserId = userId;
+                return View(vm);
+
+            }
+
+            return NotFound();
+
+
+           
         }
         [HttpPost]
-        public async Task<IActionResult> SystemsSetting(TenantSettingsViewModel vm)
+        public async Task<IActionResult> SystemsSetting(SettingsViewModel vm)
         {
-            if (vm.TenantSettings.Id == 0)
+            if (vm.Settings.Id == 0)
             {
-                vm.TenantSettings = await _unitOfWork.SettingsService.CreateAsync(vm.TenantSettings);
+                vm.Settings = await _unitOfWork.SettingsService.CreateAsync(vm.Settings);
             }
             else
             {
-                vm.TenantSettings = await _unitOfWork.SettingsService.UpdateAsync(vm.TenantSettings.Id,vm.TenantSettings);
+                vm.Settings = await _unitOfWork.SettingsService.UpdateAsync(vm.Settings.Id,vm.Settings);
             }
             await _unitOfWork.CompleteAsync();
             return RedirectToAction(nameof(SystemsSetting));

@@ -27,7 +27,7 @@ namespace DAL
         public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<DepartmentType> DepartmentTypes { get; set; }
         public DbSet<DepartmentUsers> DepartmentUsers { get; set; }
-        public DbSet<TenantSettings> TenantSettings { get; set; }
+        public DbSet<Settings> Settings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Permission>().ToTable("Permissions");

@@ -9,8 +9,9 @@ namespace Application.Interfaces
 {
     public interface ISettingsService
     {
-        Task<TenantSettingsDto> CreateAsync(TenantSettingsDto createDto);
-        Task<TenantSettingsDto> GetByIdAsync(int Id);
-        Task<TenantSettingsDto> UpdateAsync(int Id, TenantSettingsDto editDto);
+        Task<SettingsDto> CreateAsync(SettingsDto createDto);
+        Task<SettingsDto> GetByIdAsync(string Id);
+        Task<SettingsDto> UpdateAsync(int Id, SettingsDto editDto);
+        Task<bool> Update(string Id, string language);
     }
 }

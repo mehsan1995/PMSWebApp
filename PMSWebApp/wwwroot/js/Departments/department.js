@@ -90,7 +90,21 @@ $(document).on('submit', '#createDepartmentForm', function (e) {
 
 
 
+function searchDepartment() {
+    debugger
+    var searchValue = document.getElementById('searchDepartment').value;
+    // For DataTable
+    var table = $('#departmentTable').DataTable(); // Use jQuery to access the DataTable instance
+    table.search(searchValue).draw();
 
+}
+
+document.getElementById('searchDepartment').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        searchDepartment();
+
+    }
+});
 $(document).ready(function () {
     $('#departmentTable').DataTable({
 

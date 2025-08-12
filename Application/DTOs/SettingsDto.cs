@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs
 {
-    public class TenantSettingsDto
+    public class SettingsDto
     {
         public int Id { get; set; }
         public string? Logo { get; set; }
@@ -14,6 +14,7 @@ namespace Application.DTOs
         public string? Language { get; set; }
         public string? Timezone { get; set; }
         public string? Currency { get; set; }
+        public string UserId { get; set; }
 
         // Notification Preferences
         public bool EnableDesktopNotification { get; set; }
