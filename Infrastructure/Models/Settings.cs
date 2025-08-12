@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class TenantSettings : ITenant, IAuditable, ISoftDeletable
+    public class Settings : ITenant, IAuditable, ISoftDeletable
     {
         public int Id { get; set; }
-        public string? Logo { get; set; }
+        public string? ImageUrl { get; set; }
         // General Information
         public string? Language { get; set; }
         public string? Timezone { get; set; }
@@ -21,6 +21,8 @@ namespace DAL.Models
         public bool? ProjectTaskUpdates { get; set; }
         public bool? ApprovalChangeRequests { get; set; }
         public bool? SystemAnnouncements { get; set; }
+
+        public string UserId { get; set; }
         public int TenantId { get ; set ; }
         public DateTime CreatedAt { get ; set ; }
         public string? CreatedBy { get ; set ; }

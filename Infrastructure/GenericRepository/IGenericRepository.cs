@@ -13,8 +13,10 @@ namespace DAL.GenericRepository
         Task<T?> GetByIdAsync(int id);
         Task<T?> GetByIdAsync(string id);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> FindAsyncAsNoTracking(Expression<Func<T, bool>> predicate);
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
+        Task<T> UpdateDetachedAsync(T entity);
         void Remove(T entity);
         void Delete(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);

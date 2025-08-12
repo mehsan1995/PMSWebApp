@@ -14,24 +14,24 @@ namespace Application.Implementation
 {
     public class SettingsService : ISettingsService
     {
-        private readonly IGenericRepository<TenantSettings> _tenantSettingsRepository;
+        private readonly IGenericRepository<Settings> _tenantSettingsRepository;
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _dbContext;
         public SettingsService(
             IMapper mapper,
             ApplicationDbContext applicationDbContext)
         {
-            _tenantSettingsRepository = new GenericRepository<TenantSettings>(applicationDbContext);
+            _tenantSettingsRepository = new GenericRepository<Settings>(applicationDbContext);
             _mapper = mapper;
         }
 
 
-        public async Task<TenantSettingsDto> CreateAsync(TenantSettingsDto createDto)
+        public async Task<SettingsDto> CreateAsync(SettingsDto createDto)
         {
             try
             {
-                var settings = _mapper.Map<TenantSettings>(createDto);
-                return _mapper.Map<TenantSettingsDto>(await _tenantSettingsRepository.AddAsync(settings));
+                var settings = _mapper.Map<Settings>(createDto);
+                return _mapper.Map<SettingsDto>(await _tenantSettingsRepository.AddAsync(settings));
 
             }
             catch (Exception ex)
@@ -41,13 +41,25 @@ namespace Application.Implementation
             }
         }
 
-        public async Task<TenantSettingsDto> GetByIdAsync(int Id)
+        public async Task<SettingsDto> GetByIdAsync(string Id)
         {
-            var record = await _tenantSettingsRepository.FindAsync(x => x.TenantId == Id);
-            return _mapper.Map<TenantSettingsDto>(record.FirstOrDefault());
+            var record = await _tenantSettingsRepository.FindAsyncAsNoTracking(x => x.UserId == Id);
+            return _mapper.Map<SettingsDto>(record.FirstOrDefault());
         }
 
-        public async Task<TenantSettingsDto> UpdateAsync(int Id, TenantSettingsDto editDto)
+        public async Task<bool> Update(string Id, string language)
+        {
+            var record = await _tenantSettingsRepository.FindAsyncAsNoTracking(x => x.UserId == Id);
+            var setting = record.FirstOrDefault();
+            if (setting != null)
+            {
+                setting.Language = language;
+                await _tenantSettingsRepository.UpdateAsync(setting);
+            }
+            return true;
+        }
+
+        public async Task<SettingsDto> UpdateAsync(int Id, SettingsDto editDto)
         {
             var existingRecord = await _tenantSettingsRepository.GetByIdAsync(Id);
             if (existingRecord == null)
@@ -56,7 +68,7 @@ namespace Application.Implementation
             _mapper.Map(editDto, existingRecord);
             await _tenantSettingsRepository.UpdateAsync(existingRecord);
 
-            return _mapper.Map<TenantSettingsDto>(existingRecord);
+            return _mapper.Map<SettingsDto>(existingRecord);
         }
     }
 }

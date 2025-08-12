@@ -44,6 +44,17 @@ namespace DAL.GenericRepository
 
             return await query.ToListAsync();
         }
+        public async Task<IEnumerable<T>> FindAsyncAsNoTracking(Expression<Func<T, bool>> predicate)
+        {
+            IQueryable<T> query = _dbSet.AsNoTracking().Where(predicate);
+
+            if (typeof(ISoftDeletable).IsAssignableFrom(typeof(T)))
+            {
+                query = query.Where(e => EF.Property<bool>(e, "IsDeleted") == false);
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task<T> AddAsync(T entity)
         {
@@ -56,6 +67,16 @@ namespace DAL.GenericRepository
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
             await Task.CompletedTask;
+            return entity;
+        }
+        public async Task<T> UpdateDetachedAsync(T entity)
+        {
+            _dbSet.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+            // no SaveChanges here
+            await Task.CompletedTask;
+            // Detach entity to prevent stale cache
+            _context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
 

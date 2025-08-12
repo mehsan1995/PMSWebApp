@@ -1,4 +1,5 @@
 ﻿using Application.AutoMapper;
+using Application.DTOs;
 using Application.Implementation;
 using Application.Interfaces;
 using Application.UnitOfWork;
@@ -13,7 +14,10 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using PMSWebApp.Helper;
+using PMSWebApp.Models;
 using System.Globalization;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -87,20 +91,34 @@ builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();
 
+//builder.Services.Configure<RequestLocalizationOptions>(options =>
+//{
+//    var supportedCultures = new[]
+//    {
+//        new CultureInfo("en-US"),
+//        new CultureInfo("ar-SA")
+//    };
+
+//    options.DefaultRequestCulture = new RequestCulture("en-US");
+//    options.SupportedCultures = supportedCultures;
+//    options.SupportedUICultures = supportedCultures;
+
+//    // Optional: Automatically switch based on query string or cookie
+//    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+//});
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCultures = new[]
-    {
-        new CultureInfo("en-US"),
-        new CultureInfo("ar-SA")
-    };
+    var supportedCultures = new[] { "en-US", "ar-SA" }
+        .Select(c => new CultureInfo(c)).ToList();
 
     options.DefaultRequestCulture = new RequestCulture("en-US");
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 
-    // Optional: Automatically switch based on query string or cookie
-    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+    // Clear default providers and add your custom provider first
+    options.RequestCultureProviders.Clear();
+    options.RequestCultureProviders.Add(new CustomUserCultureProvider(builder.Services.BuildServiceProvider().GetRequiredService<ISettingsService>()));
 });
 
 builder.Services.AddHttpContextAccessor();
@@ -129,8 +147,39 @@ app.UseRouting();
 app.UseAuthentication(); // Must be before Authorization
 app.UseAuthorization();
 
+//var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+//app.UseRequestLocalization(locOptions.Value);
 var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(locOptions.Value);
+
+app.MapPost("/change-culture", async (ChangeCultureRequest request, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, HttpResponse response) =>
+{
+    var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    if (userId == null)
+        return Results.Unauthorized();
+
+    var settings = await unitOfWork.SettingsService.GetByIdAsync(userId);
+    if (settings == null)
+    {
+        settings = new SettingsDto { UserId = userId, Language = request.Culture };
+        await unitOfWork.SettingsService.CreateAsync(settings);
+        await unitOfWork.CompleteAsync();
+    }
+    else
+    {
+        settings.Language = request.Culture;
+        await unitOfWork.SettingsService.Update(userId,request.Culture);
+        await unitOfWork.CompleteAsync();
+    }
+
+    response.Cookies.Append(
+     CookieRequestCultureProvider.DefaultCookieName,
+     CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(request.Culture)),
+     new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+ );
+
+    return Results.Ok();
+});
 
 
 // Routing
