@@ -1,0 +1,59 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Application/bin/Debug/net8.0/Application.pdb
+/Application/bin/Debug/net8.0/Application.dll
+/Application/obj/Debug/net8.0/ref/Application.dll
+/Application/obj/Debug/net8.0/refint/Application.dll
+*.json
+/Application/obj/Debug/net8.0/Application.pdb
+/Application/obj/Debug/net8.0/Application.AssemblyInfo.cs
+/Application/obj/Debug/net8.0/Application.AssemblyInfoInputs.cache
+/Application/obj/Debug/net8.0/Application.csproj.FileListAbsolute.txt
+/Application/obj/Debug/net8.0/Application.dll
+/PMSWebApp/bin/Debug/net8.0/ar-SA/PMSWebApp.resources.dll
+/PMSWebApp/bin/Debug/net8.0/en-US/PMSWebApp.resources.dll
+/PMSWebApp/bin/Debug/net8.0/Application.dll
+/PMSWebApp/bin/Debug/net8.0/Application.pdb
+/PMSWebApp/bin/Debug/net8.0/PMSWebApp.dll
+/PMSWebApp/bin/Debug/net8.0/PMSWebApp.exe
+/PMSWebApp/bin/Debug/net8.0/PMSWebApp.pdb
+/PMSWebApp/bin/Debug/net8.0/PMSWebApp.staticwebassets.endpoints.json
+/PMSWebApp/obj/Debug/net8.0/ar-SA/PMSWebApp.resources.dll
+/PMSWebApp/obj/Debug/net8.0/en-US/PMSWebApp.resources.dll
+/PMSWebApp/obj/Debug/net8.0/ref/PMSWebApp.dll
+/PMSWebApp/obj/Debug/net8.0/refint/PMSWebApp.dll
+/PMSWebApp/obj/Debug/net8.0/apphost.exe
+/PMSWebApp/obj/Debug/net8.0/PMSWebApp.AssemblyInfo.cs
+/PMSWebApp/obj/Debug/net8.0/PMSWebApp.AssemblyInfoInputs.cache
+/PMSWebApp/obj/Debug/net8.0/PMSWebApp.csproj.AssemblyReference.cache
+/PMSWebApp/obj/Debug/net8.0/PMSWebApp.csproj.FileListAbsolute.txt
+/PMSWebApp/obj/Debug/net8.0/PMSWebApp.dll
+/PMSWebApp/obj/Debug/net8.0/PMSWebApp.pdb
+/PMSWebApp/obj/Debug/net8.0/rjimswa.dswa.cache.json
+/PMSWebApp/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
+/PMSWebApp/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
+/PMSWebApp/obj/Debug/net8.0/rpswa.dswa.cache.json
+/PMSWebApp/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/PMSWebApp/obj/Debug/net8.0/staticwebassets.build.json
+/PMSWebApp/obj/Debug/net8.0/staticwebassets.build.json.cache
+/.vs/ProjectEvaluation/pms api.metadata.v9.bin
+/.vs/ProjectEvaluation/pms api.projects.v9.bin
+/.vs/ProjectEvaluation/pms api.strings.v9.bin
+/PMSWebApp/Views/Settings/SystemsSetting.cshtml
+/.vs/PMS API/config/applicationhost.config
+/.vs/PMS API/CopilotIndices/17.14.878.3237/CodeChunks.db
+/.vs/PMS API/CopilotIndices/17.14.878.3237/CodeChunks.db-shm
+/.vs/PMS API/CopilotIndices/17.14.878.3237/CodeChunks.db-wal
+/.vs/PMS API/CopilotIndices/17.14.878.3237/SemanticSymbols.db
+/.vs/PMS API/CopilotIndices/17.14.878.3237/SemanticSymbols.db-shm
+/.vs/PMS API/CopilotIndices/17.14.878.3237/SemanticSymbols.db-wal
+/.vs/PMS API/DesignTimeBuild/.dtbcache.v2
+/.vs/PMS API/FileContentIndex/2168f85f-aa9d-47b0-b796-efce9a2600e5.vsidx
+/.vs/PMS API/FileContentIndex/504ff8b8-1ade-4e09-8187-840314987fe2.vsidx
+/.vs/PMS API/FileContentIndex/570a5123-3d95-4774-876c-065fae0778a5.vsidx
+/.vs/PMS API/FileContentIndex/95aa9374-96ff-41cc-9c23-09b38d652fe2.vsidx
+/.vs/PMS API/FileContentIndex/bea8b1dc-ba6e-4abe-bcf7-6ef21bf66393.vsidx
+/.vs/PMS API/v17/.futdcache.v2
+/.vs/PMS API/v17/.suo
