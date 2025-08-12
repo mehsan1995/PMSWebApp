@@ -54,7 +54,7 @@ namespace Application.Implementation
                      _departmentRepository.Delete(department);
                     
                 }
-                throw new KeyNotFoundException($"Department with Id {Id} not found.");
+                
 
             }
             catch (Exception)

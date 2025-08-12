@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using Application.UnitOfWork;
 using DAL.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -151,6 +152,20 @@ namespace PMSWebApp.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
             
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            try
+            {
+                await _unitOfWork.DepartmentService.DeleteAsync(Id);
+                await _unitOfWork.CompleteAsync();
+                return Json(new { success = true, message = "Successfully deleted" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
 
