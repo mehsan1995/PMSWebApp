@@ -20,13 +20,14 @@ namespace Application.UnitOfWork
         public IPermissionsService PermissionService { get; }
         public IDepartmentUsersService DepartmentUsersService { get; }
         public ISettingsService SettingsService { get; }
+        public IProjectService ProjectService { get; }
 
         public ITenantService TenantService { get; }
 
         public UnitOfWork(ApplicationDbContext context, IUserService userService, IRoleService roleService,
                IDepartmentService departmentService, IPermissionsService permissionService,
                ITenantService tenantService, IDepartmentTypes departmentTypes, IDepartmentUsersService departmentUsersService,
-               ISettingsService settingsService)
+               ISettingsService settingsService, IProjectService projectService)
         {
             _context = context;
             UserService = userService;
@@ -37,6 +38,7 @@ namespace Application.UnitOfWork
             DepartmentTypes = departmentTypes;
             DepartmentUsersService = departmentUsersService;
             SettingsService = settingsService;
+            ProjectService = projectService;
         }
 
         public async Task<int> CompleteAsync() => await _context.SaveChangesAsync();

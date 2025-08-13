@@ -111,6 +111,28 @@
             </ul>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-menu-item nav-link d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#menu4" role="button" aria-expanded="false">
+            <span>
+                <i class="bi bi-journals"></i>
+                <span class="arabic-font">@Localizer["Execution"]</span>
+            </span>
+            <i class="bi bi-chevron-right"></i>
+        </a>
+        <div class="collapse" id="menu4" data-bs-parent="#sidebar">
+            <ul class="nav flex-column ms-4">
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["Program"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a asp-action="Dashboard" asp-controller="Projects" class="nav-menu-item nav-link" ><span class="arabic-font">@Localizer["Projects"]</span></a>
+                </li>
+                <li class="nav-item chil-menu">
+                    <a class="nav-menu-item nav-link" href="#"><span class="arabic-font">@Localizer["Tasks"]</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
 </ul>
 <hr>
 <ul class="nav flex-column mt-auto">

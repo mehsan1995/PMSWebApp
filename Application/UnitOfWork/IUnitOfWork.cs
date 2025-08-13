@@ -19,6 +19,7 @@ namespace Application.UnitOfWork
         IDepartmentUsersService DepartmentUsersService { get; }
         ITenantService TenantService { get; }
         ISettingsService SettingsService { get; }
+        IProjectService ProjectService { get; }
         Task<int> CompleteAsync();
     }
 }

@@ -195,3 +195,4 @@ D:\Ehsan\pms-web-api\PMS API\WebAPI\obj\Debug\net8.0\refint\WebAPI.dll
 D:\Ehsan\pms-web-api\PMS API\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 D:\Ehsan\pms-web-api\PMS API\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 D:\Ehsan\pms-web-api\PMS API\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+D:\Ehsan\pms-web-api\PMS API\WebAPI\obj\Debug\net8.0\WebAPI.sourcelink.json
