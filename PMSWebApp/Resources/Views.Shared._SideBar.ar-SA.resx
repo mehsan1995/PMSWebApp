@@ -129,6 +129,9 @@
   <data name="Departments" xml:space="preserve">
     <value>الأقسام</value>
   </data>
+  <data name="Execution" xml:space="preserve">
+    <value>تنفيذ</value>
+  </data>
   <data name="FAQs" xml:space="preserve">
     <value>الأسئلة الشائعة</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="PrivacyPolicy" xml:space="preserve">
     <value>سياسة الخصوصية</value>
+  </data>
+  <data name="Program" xml:space="preserve">
+    <value>برنامج</value>
   </data>
   <data name="Projects" xml:space="preserve">
     <value>المشاريع</value>

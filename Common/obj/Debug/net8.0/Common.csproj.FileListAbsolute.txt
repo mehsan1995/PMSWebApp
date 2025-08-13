@@ -6,6 +6,7 @@ D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEdit
 D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
 D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
 D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.sourcelink.json
 D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.dll
 D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\refint\Common.dll
 D:\Ehsan\pms-web-api\PMS API\Common\obj\Debug\net8.0\Common.pdb

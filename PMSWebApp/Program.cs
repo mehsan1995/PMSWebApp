@@ -80,6 +80,7 @@ builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IDepartmentTypes, DepartmentTypes>();
 builder.Services.AddScoped<IDepartmentUsersService, DepartmentUsersService>();
 builder.Services.AddScoped<ISettingsService, SettingsService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 
 // Required for Identity UI

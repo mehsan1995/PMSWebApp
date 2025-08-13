@@ -3,6 +3,18 @@
     font-size: 0.9rem;
 }
 
+/*PMS Hover Class*/
+.pms-hover:hover {
+    background-color: #d1e7dd!important;
+    font-weight: bold!important;
+    color: Green!important;
+}
+.pms-hover.active {
+    background-color: #d1e7dd !important;
+    font-weight: bold !important;
+    color: Green !important;
+}
+
 .sidebar {
     background-color: #fff;
     border-right: 1px solid #ddd;
